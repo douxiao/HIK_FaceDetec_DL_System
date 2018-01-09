@@ -1,9 +1,15 @@
 # coding=utf-8
 import cv2
 from Configuration.config import *  # 引入配置文件包
+from Network.cam_link import cam_link
 
-source = get_url()
-
+link = cam_link()
+while(True):  # 等待摄像头连接
+    print("未检测到摄像头，请检查设备连接！")
+    link = cam_link()
+    if link == 0:
+        break
+source = get_rtsp()
 cam = cv2.VideoCapture(source)
 
 while (True):
